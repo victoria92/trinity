@@ -2,11 +2,7 @@
 
 class Knight : Piece {
 public:
-    Knight(Field field, string rcolor, string rname = "knight") : color(rcolor), name(rname), place(field), board(field.board) {
-        field.piece = this;
-        field.empty = false;
-        moved = false;
-    }
+    Knight(Field field, string fcolor) : Piece(field, "knight", fcolor) {}
 
     void possible_moves(vector<Field>& v) {
         int x = field.x;
@@ -35,12 +31,5 @@ public:
         if(x - 2 >= 0 && y - 1 >= 0 && (board[x - 2][y - 1].empty || board[x - 2][y - 1].piece.color != color)) {
             v.push_back(board[x - 2][y - 1]);
         }
-    }
-
-    void move(Field field)
-        field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
     }
 }

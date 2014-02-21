@@ -3,12 +3,9 @@
 class King : Piece {
 private:
     bool moved;
+    bool beaten;
 public:
-    King(Field field, string rcolor, string rname = "king") : color(rcolor), name(rname), place(field), board(field.board) {
-        field.piece = this;
-        field.empty = false;
-        moved = false;
-    }
+    King(Field field, string fcolor) : Piece(field, "king", fcolor) {}
 
     void possible_moves(vector<Field>& v) {
         int x = field.x;
@@ -22,7 +19,7 @@ public:
                 board[6][y].empty && board[5][y].empty) {
                    v.push_back(board[7][y]);
                }
-        }
+        }board[0][y].empty
         if(!board[x - 1][y - 1].empty && board[x - 1][y - 1].piece.color != color) {
             v.push_back(board[x - 1][y - 1]);
         }
@@ -47,13 +44,6 @@ public:
         if(!board[x + 1][y + 1].empty && board[x + 1][y + 1].piece.color != color) {
             v.push_back(board[x + 1][y + 1]);
         }
-    }
-
-    void move(Field field)
-        field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
     }
 }
 

@@ -14,11 +14,13 @@ struct Board {
 };
 
 class Piece {
+    bool moved;
+    bool beaten;
     string color;
     string name;
-    Field place;
+    Field* place;
     Board board;
-    Piece(Field, string, string);
-    virtual void possible_moves(vector&);
-    virtual void move(Field&);
+    Piece(Field&, string, string);
+    virtual void possible_moves(vector<Field>&);
+    void move(Field&);
 }

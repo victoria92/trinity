@@ -2,11 +2,7 @@
 
 class Bishop : Piece {
 public:
-    Bishop(Field field, string rcolor, string rname = "rook") : color(rcolor), name(rname), place(field), board(field.board) {
-        field.piece = this;
-        field.empty = false;
-        moved = false;
-    }
+    Bishop(Field field, string fcolor) : Piece(field, "bishop", fcolor) {}
 
     void possible_moves(vector<Field>& v) {
         int x = field.x;
@@ -39,13 +35,6 @@ public:
         if(i >= 0 && j >= 0 && board[i][j].piece->color != color) {
             v.push_back(board[i][j]);
         }
-    }
-
-    void move(Field field)
-        field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
     }
 }
 

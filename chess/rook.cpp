@@ -5,11 +5,7 @@ private:
     bool moved;
 
 public:
-    Rook(Field field, string rcolor, string rname = "rook") : color(rcolor), name(rname), place(field), board(field.board) {
-        field.piece = this;
-        field.empty = false;
-        moved = false;
-    }
+    Rook(Field field, string fcolor) : Piece(field, "rook", fcolor) {}
 
     void possible_moves(vector<Field>& v) {
         int x = field.x;
@@ -42,12 +38,5 @@ public:
         if(i >= 0 && board[x][i].piece->color != color) {
             v.push_back(board[x][i]);
         }
-    }
-
-    void move(Field field)
-        field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
     }
 }

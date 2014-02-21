@@ -2,11 +2,7 @@
 
 class Queen : Piece {
 public:
-    Queen(Field field, string rcolor, string rname = "queen") : color(rcolor), name(rname), place(field), board(field.board) {
-        field.piece = this;
-        field.empty = false;
-        moved = false;
-    }
+    Queen(Field field, string fcolor) : Piece(field, "queen", fcolor) {}
 
     void possible_moves(vector<Field>& v) {
         int x = field.x;
@@ -68,13 +64,6 @@ public:
         if(i >= 0 && j >= 0 && board[i][j].piece->color != color) {
             v.push_back(board[i][j]);
         }
-    }
-
-    void move(Field field)
-        field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
     }
 }
 
