@@ -457,15 +457,18 @@ bool DefaultSceneParser::parse(const char* filename, Scene* ss)
 			continue;
 		}
 		char *commentBegin = NULL;
-		if (strstr(line, "//")) commentBegin = strstr(line, "//");
+		if (strstr(line, "//")) 
+			commentBegin = strstr(line, "//");
 		if (strstr(line, "#")) {
 			char* temp = strstr(line, "#");
 			if (!commentBegin || commentBegin > temp) commentBegin = temp;
 		}
 		if (commentBegin) *commentBegin = 0;
 		stripWhiteSpace(line);
-		if (strlen(line) == 0) continue; // empty line
-		if (line[0] == '#' || (line[0] == '/' && line[1] == '/')) continue; // comment
+		if (strlen(line) == 0) 
+			continue; // empty line
+		if (line[0] == '#' || (line[0] == '/' && line[1] == '/')) 
+			continue; // comment
 		if (line[0] == '/' && line[1] == '*') {
 			commentedOut = true;
 			continue;
