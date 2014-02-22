@@ -14,6 +14,9 @@
 #include "lights.h"
 #include "cxxptl_sdl.h"
 
+#include <map>
+#include "../chess/pawn.h"
+
 using namespace std;
 
 Color vfb[VFB_MAX_SIZE][VFB_MAX_SIZE]; //!< virtual framebuffer
@@ -574,37 +577,9 @@ void mainloop(void)
 
 int main(int argc, char** argv)
 {
-	if (!parseCmdLine(argc, argv)) return 0;
-	initRandom((Uint32) time(NULL));
-	initColor();
-	if (!scene.parseScene(defaultScene)) {
-		printf("Could not parse the scene!\n");
-		return -1;
-	}
-	if (scene.settings.numThreads == 0)
-		scene.settings.numThreads = get_processor_count();
-	if (scene.settings.interactive)
-		scene.settings.wantAA = scene.settings.wantPrepass = false;
-	bool fullscreen = scene.settings.interactive && scene.settings.fullscreen;
-
-	if (!initGraphics(scene.settings.frameWidth, scene.settings.frameHeight, fullscreen)) return -1;
-	scene.beginRender();
-	if (scene.settings.interactive) {
-		mainloop();
-	} else {
-		Uint32 startTicks = SDL_GetTicks();
-		renderScene_Threaded();
-		float renderTime = (SDL_GetTicks() - startTicks) / 1000.0f;
-		printf("Render time: %.2f seconds.\n", renderTime);
-		setWindowCaption("trinity: rendertime: %.2fs", renderTime);
-		displayVFB(vfb);
-		waitForUserExit();
-	}
-	closeGraphics();
-
+    Board board();
 	std::map<string, Piece*> pieces;
-	Board board;
-	pieces["black_pawn1"] = new Pawn(board.board[7][6], "pawn", "black");
+	pieces.insert( std::make_pair("black_pawn1", new Pawn(board.board[7][6], "pawn", "black")));
 	pieces["black_pawn2"] = new Pawn(board.board[6][6], "pawn", "black");
 	pieces["black_pawn3"] = new Pawn(board.board[5][6], "pawn", "black");
 	pieces["black_pawn4"] = new Pawn(board.board[4][6], "pawn", "black");
@@ -636,6 +611,34 @@ int main(int argc, char** argv)
 	pieces["white_bishop2"] = new Pawn(board.board[2][0], "bishop", "white");
 	pieces["white_queen"] = new Pawn(board.board[3][0], "queen", "white");
 	pieces["white_king"] = new Pawn(board.board[4][0], "king", "white");
+
+	if (!parseCmdLine(argc, argv)) return 0;
+	initRandom((Uint32) time(NULL));
+	initColor();
+	if (!scene.parseScene(defaultScene)) {
+		printf("Could not parse the scene!\n");
+		return -1;
+	}
+	if (scene.settings.numThreads == 0)
+		scene.settings.numThreads = get_processor_count();
+	if (scene.settings.interactive)
+		scene.settings.wantAA = scene.settings.wantPrepass = false;
+	bool fullscreen = scene.settings.interactive && scene.settings.fullscreen;
+
+	if (!initGraphics(scene.settings.frameWidth, scene.settings.frameHeight, fullscreen)) return -1;
+	scene.beginRender();
+	if (scene.settings.interactive) {
+		mainloop();
+	} else {
+		Uint32 startTicks = SDL_GetTicks();
+		renderScene_Threaded();
+		float renderTime = (SDL_GetTicks() - startTicks) / 1000.0f;
+		printf("Render time: %.2f seconds.\n", renderTime);
+		setWindowCaption("trinity: rendertime: %.2fs", renderTime);
+		displayVFB(vfb);
+		waitForUserExit();
+	}
+	closeGraphics();
 
 	return 0;
 }
