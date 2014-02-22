@@ -1,0 +1,582 @@
+# this is the chess board
+
+GlobalSettings {
+	frameWidth          640
+	frameHeight         480
+	ambientLight        (0.075, 0.075, 0.075)
+	maxTraceDepth       8
+	wantPrepass			true
+	wantAA				false
+	interactive			true
+	fullscreen			false
+}
+
+Camera camera {
+	pos          (-30, 62, -70)
+	yaw           -34.4
+	pitch        -32.9
+	roll          0.0
+	fov           90
+	aspect   1.333
+}
+
+//////////////////////// LIGHTS ////////////////////////////////////////////
+
+
+PointLight l1 {
+	pos   (-750, 1200, -750)
+	color   (1, 1, 1)
+	power 500000
+}
+
+RectLight l_small {
+	translate  (0, 58, 80)
+	rotate     (0, -62, 0)
+	scale      (10, 10, 10)
+	color	   (1, 1, 1)
+	power      70
+	xSubd  4
+	ySubd  4
+}
+
+//////////////////////// GEOMETRIES ////////////////////////////////////////
+
+Cube base {
+	side 10
+	center    (0, 1, 0)
+}
+
+Cube crop {
+	side 12
+	center    (0, -6, 0)
+}
+
+CsgInter field {
+	left  base
+	right crop
+}
+
+Cube platformBase {
+	side 97
+	center    (0, 38, 0)
+}
+
+Cube platformCrop {
+	side 100
+	center    (0, -51, 0)
+}
+
+CsgInter boardBase {
+	left  platformBase
+	right platformCrop
+}
+
+//////////////////////// TEXTURES & SHADERS  ///////////////////////////////
+
+Lambert whiteLamb {
+	color (0.76, 0.75, 0.5)
+}
+
+Lambert darkLamb {
+	color (0.26, 0.25, 0.2)
+}
+
+Lambert boardLamb {
+	color (0.39, 0.23, 0.04)
+}
+
+Reflection reflect {
+}
+
+Layered whiteFieldShade {
+	layer whiteLamb (1, 1, 1)
+	layer reflect (0.2, 0.2, 0.2)
+}
+
+Layered darkFieldShade {
+	layer darkLamb (1, 1, 1)
+	layer reflect (0.2, 0.2, 0.2)
+}
+
+Layered boardShade {
+	layer boardLamb (1, 1, 1)
+	layer reflect (0.2, 0.2, 0.2)
+}
+
+Lambert selection {
+	color (0.79, 0.23, 0.04)
+}
+
+///////////////////////// NODES /////////////////////////////////////////////////
+
+
+Node board {
+	geometry  boardBase
+	shader    boardShade
+	highlight boardShade
+	translate (38, -1, 38)
+}
+
+// Row 1 --------------------------------------------
+
+Node field_1_A {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (0, 0, 0)
+}
+
+Node field_1_B {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (11, 0, 0)
+}
+
+Node field_1_C {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (22, 0, 0)
+}
+
+Node field_1_D {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (33, 0, 0)
+}
+
+Node field_1_E {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (44, 0, 0)
+}
+
+Node field_1_F {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (55, 0, 0)
+}
+
+Node field_1_G {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (66, 0, 0)
+}
+
+Node field_1_H {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (77, 0, 0)
+}
+
+// Row 2 --------------------------------------------
+
+Node field_2_A {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (0, 0, 11)
+}
+
+Node field_2_B {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (11, 0, 11)
+}
+
+Node field_2_C {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (22, 0, 11)
+}
+
+Node field_2_D {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (33, 0, 11)
+}
+
+Node field_2_E {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (44, 0, 11)
+}
+
+Node field_2_F {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (55, 0, 11)
+}
+
+Node field_2_G {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (66, 0, 11)
+}
+
+Node field_2_H {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (77, 0, 11)
+}
+
+// Row 3 --------------------------------------------
+
+Node field_3_A {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (0, 0, 22)
+}
+
+Node field_3_B {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (11, 0, 22)
+}
+
+Node field_3_C {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (22, 0, 22)
+}
+
+Node field_3_D {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (33, 0, 22)
+}
+
+Node field_3_E {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (44, 0, 22)
+}
+
+Node field_3_F {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (55, 0, 22)
+}
+
+Node field_3_G {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (66, 0, 22)
+}
+
+Node field_3_H {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (77, 0, 22)
+}
+
+// Row 4 --------------------------------------------
+
+Node field_4_A {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (0, 0, 33)
+}
+
+Node field_4_B {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (11, 0, 33)
+}
+
+Node field_4_C {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (22, 0, 33)
+}
+
+Node field_4_D {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (33, 0, 33)
+}
+
+Node field_4_E {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (44, 0, 33)
+}
+
+Node field_4_F {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (55, 0, 33)
+}
+
+Node field_4_G {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (66, 0, 33)
+}
+
+Node field_4_H {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (77, 0, 33)
+}
+
+// Row 5 --------------------------------------------
+
+Node field_5_A {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (0, 0, 44)
+}
+
+Node field_5_B {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (11, 0, 44)
+}
+
+Node field_5_C {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (22, 0, 44)
+}
+
+Node field_5_D {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (33, 0, 44)
+}
+
+Node field_5_E {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (44, 0, 44)
+}
+
+Node field_5_F {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (55, 0, 44)
+}
+
+Node field_5_G {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (66, 0, 44)
+}
+
+Node field_5_H {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (77, 0, 44)
+}
+
+// Row 6 --------------------------------------------
+
+Node field_6_A {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (0, 0, 55)
+}
+
+Node field_6_B {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (11, 0, 55)
+}
+
+Node field_6_C {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (22, 0, 55)
+}
+
+Node field_6_D {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (33, 0, 55)
+}
+
+Node field_6_E {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (44, 0, 55)
+}
+
+Node field_6_F {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (55, 0, 55)
+}
+
+Node field_6_G {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (66, 0, 55)
+}
+
+Node field_6_H {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (77, 0, 55)
+}
+
+// Row 7 --------------------------------------------
+
+Node field_7_A {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (0, 0, 66)
+}
+
+Node field_7_B {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (11, 0, 66)
+}
+
+Node field_7_C {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (22, 0, 66)
+}
+
+Node field_7_D {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (33, 0, 66)
+}
+
+Node field_7_E {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (44, 0, 66)
+}
+
+Node field_7_F {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (55, 0, 66)
+}
+
+Node field_7_G {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (66, 0, 66)
+}
+
+Node field_7_H {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (77, 0, 66)
+}
+
+// Row 8 --------------------------------------------
+
+Node field_8_A {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (0, 0, 77)
+}
+
+Node field_8_B {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (11, 0, 77)
+}
+
+Node field_8_C {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (22, 0, 77)
+}
+
+Node field_8_D {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (33, 0, 77)
+}
+
+Node field_8_E {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (44, 0, 77)
+}
+
+Node field_8_F {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (55, 0, 77)
+}
+
+Node field_8_G {
+	geometry  field
+	shader    whiteFieldShade
+	highlight selection
+	translate (66, 0, 77)
+}
+
+Node field_8_H {
+	geometry  field
+	shader    darkFieldShade
+	highlight selection
+	translate (77, 0, 77)
+}

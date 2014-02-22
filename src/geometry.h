@@ -30,11 +30,11 @@ class Geometry;
 struct IntersectionData {
 	Vector p; //!< intersection point in the world-space
 	Vector normal; //!< the normal of the geometry at the intersection point
-	Vector dNdx, dNdy; 
+	Vector dNdx, dNdy;
 	double dist; //!< before intersect(): the max dist to look for intersection; after intersect() - the distance found
-	
+
 	double u, v; //!< 2D UV coordinates for texturing, etc.
-	
+
 	Geometry* g; //!< The geometry which was hit
 };
 
@@ -45,7 +45,7 @@ public:
 	/**
 	 *  @brief Intersect a geometry with a ray.
 	 *  Returns true if an intersection is found, and it was closer than the current value of data.dist.
-	 * 
+	 *
 	 *  @param ray - the ray to be traced
 	 *  @param data - in the event an intersection is found, this is filled with info about the intersection point.
 	 *  NOTE: the intersect() function MUST NOT touch any member of data, before it can prove the intersection
@@ -74,7 +74,7 @@ public:
 	// from Intersectable:
 	virtual bool intersect(const Ray& ray, IntersectionData& data) = 0;
 	virtual bool isInside(const Vector& p) const = 0;
-	
+
 	// from SceneElement:
 	ElementType getElementType() const { return ELEM_GEOMETRY; }
 };
@@ -100,7 +100,7 @@ class Sphere: public Geometry {
 	double R;
 public:
 	Sphere(const Vector& center = Vector(0, 0, 0), double R = 1): center(center), R(R) {}
-	
+
 	void fillProperties(ParsedBlock& pb)
 	{
 		pb.getVectorProp("center", &center);
@@ -125,9 +125,9 @@ public:
 		pb.getDoubleProp("side", &side);
 	}
 
-	bool intersect(const Ray& ray, IntersectionData& data);	
+	bool intersect(const Ray& ray, IntersectionData& data);
 	const char* getName() { return "Cube"; }
-	bool isInside(const Vector& p) const { 
+	bool isInside(const Vector& p) const {
 		return (fabs(p.x - center.x) <= side * 0.5 &&
 				fabs(p.y - center.y) <= side * 0.5 &&
 				fabs(p.z - center.z) <= side * 0.5);
@@ -148,9 +148,9 @@ public:
 		pb.getGeometryProp("left", &left);
 		pb.getGeometryProp("right", &right);
 	}
-	
-	bool intersect(const Ray& ray, IntersectionData& data);	
-	
+
+	bool intersect(const Ray& ray, IntersectionData& data);
+
 	virtual bool boolOp(bool inLeft, bool inRight) const = 0;
 	bool isInside(const Vector& p) const { return boolOp(left->isInside(p), right->isInside(p)); }
 };
@@ -158,7 +158,7 @@ public:
 class CsgUnion: public CsgOp {
 public:
 	CsgUnion(Geometry* left = NULL, Geometry* right = NULL): CsgOp(left, right) {}
-	
+
 	bool boolOp(bool inLeft, bool inRight) const { return inLeft || inRight; }
 	const char* getName() { return "CsgUnion"; }
 };
@@ -168,7 +168,7 @@ public:
 	CsgDiff(Geometry* left = NULL, Geometry* right = NULL): CsgOp(left, right) {}
 
 	bool intersect(const Ray& ray, IntersectionData& data); // override the generic intersector to handle a corner case
-	
+
 	bool boolOp(bool inLeft, bool inRight) const { return inLeft && !inRight; }
 	const char* getName() { return "CsgDiff"; }
 };
@@ -176,7 +176,7 @@ public:
 class CsgInter: public CsgOp {
 public:
 	CsgInter(Geometry* left = NULL, Geometry* right = NULL): CsgOp(left, right) {}
-	
+
 	bool boolOp(bool inLeft, bool inRight) const { return inLeft && inRight; }
 	const char* getName() { return "CsgInter"; }
 };
@@ -190,13 +190,18 @@ class Node: public SceneElement, public Intersectable {
 public:
 	Geometry* geom;
 	Shader* shader;
+	Shader* highlight;
 	Transform transform;
 	Texture* bump;
-	
-	Node() { bump = NULL; }
+
+	bool selected;
+
+	Node(): selected(false) { bump = NULL; }
 	Node(Geometry* g, Shader* s) { geom = g; shader = s; bump = NULL; }
-	
+
 	// from Intersectable:
+	void toggleSelected() {selected = !selected;}
+
 	bool intersect(const Ray& ray, IntersectionData& data);
 	bool isInside(const Vector& p) const { return geom->isInside(transform.undoPoint(p)); }
 
@@ -206,6 +211,7 @@ public:
 	{
 		pb.getGeometryProp("geometry", &geom);
 		pb.getShaderProp("shader", &shader);
+		pb.getHighlightProp("highlight", &highlight);
 		pb.getTransformProp(transform);
 		pb.getTextureProp("bump", &bump);
 	}

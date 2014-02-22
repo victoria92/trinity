@@ -133,13 +133,13 @@ static void findUnusedFN(char fn[], const char* suffix)
 		fclose(f);
 		idx++;
 	}
-	sprintf(fn, "trinity_%04d.%s", idx, suffix); 
+	sprintf(fn, "trinity_%04d.%s", idx, suffix);
 }
 
 bool takeScreenshot(const char* filename)
 {
 	extern Color vfb[VFB_MAX_SIZE][VFB_MAX_SIZE]; // from main.cpp
-	
+
 	Bitmap bmp;
 	bmp.generateEmptyImage(frameWidth(), frameHeight());
 	for (int y = 0; y < frameHeight(); y++)
@@ -158,38 +158,38 @@ bool takeScreenshotAuto(Bitmap::OutputFormat fmt)
 	return takeScreenshot(fn);
 }
 
-static void handleEvent(SDL_Event& ev)
+static bool handleEvent(SDL_Event& ev)
 {
 	switch (ev.type) {
 		case SDL_QUIT:
 			wantToQuit = true;
-			return;
+			return false;
 		case SDL_KEYDOWN:
 		{
 			switch (ev.key.keysym.sym) {
 				case SDLK_ESCAPE:
 					wantToQuit = true;
-					return;
+					return false;
 				case SDLK_F12:
 					// Shift+F12: screenshot in EXR; else, do it in (gamma-compressed) BMP.
 					if (ev.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT))
 						takeScreenshotAuto(Bitmap::outputFormat_EXR);
 					else
 						takeScreenshotAuto(Bitmap::outputFormat_BMP);
-					break;
+					return false;
 				default:
-					break;
+					return false;
 			}
-			break;
+			return false;
 		}
 		case SDL_MOUSEBUTTONUP:
 		{
 			extern void handleMouse(SDL_MouseButtonEvent *mev);
-			handleMouse(&ev.button);
-			break;
+            handleMouse(&ev.button);
+            return false;
 		}
 		default:
-			break;
+			return false;
 	}
 }
 
@@ -243,15 +243,15 @@ public:
 bool drawRect(Rect r, const Color& c)
 {
 	MutexRAII raii(render_lock);
-	
+
 	if (render_async && !rendering) return false;
-	
+
 	r.clip(frameWidth(), frameHeight());
-	
+
 	int rs = screen->format->Rshift;
 	int gs = screen->format->Gshift;
 	int bs = screen->format->Bshift;
-	
+
 	Uint32 clr = c.toRGB32(rs, gs, bs);
 	for (int y = r.y0; y < r.y1; y++) {
 		Uint32 *row = (Uint32*) ((Uint8*) screen->pixels + y * screen->pitch);
@@ -259,7 +259,7 @@ bool drawRect(Rect r, const Color& c)
 			row[x] = clr;
 	}
 	SDL_UpdateRect(screen, r.x0, r.y0, r.w, r.h);
-	
+
 	return true;
 }
 
@@ -268,7 +268,7 @@ bool displayVFBRect(Rect r, Color vfb[VFB_MAX_SIZE][VFB_MAX_SIZE])
 	MutexRAII raii(render_lock);
 
 	if (render_async && !rendering) return false;
-	
+
 	r.clip(frameWidth(), frameHeight());
 	int rs = screen->format->Rshift;
 	int gs = screen->format->Gshift;
@@ -279,7 +279,7 @@ bool displayVFBRect(Rect r, Color vfb[VFB_MAX_SIZE][VFB_MAX_SIZE])
 			row[x] = vfb[y][x].toRGB32(rs, gs, bs);
 	}
 	SDL_UpdateRect(screen, r.x0, r.y0, r.w, r.h);
-	
+
 	return true;
 }
 
@@ -288,7 +288,7 @@ bool markRegion(Rect r, const Color& bracketColor)
 	MutexRAII raii(render_lock);
 
 	if (render_async && !rendering) return false;
-	
+
 	r.clip(frameWidth(), frameHeight());
 	const int L = 8;
 	if (r.w < L+3 || r.h < L+3) return true; // region is too small to be marked
@@ -305,7 +305,7 @@ bool markRegion(Rect r, const Color& bracketColor)
 		DRAW_ONE(y, r.h - 1 - (x), color); \
 		DRAW_ONE(r.w - 1 - (x), r.h - 1 - (y), color); \
 		DRAW_ONE(r.w - 1 - (y), r.h - 1 - (x), color)
-	
+
 	for (int i = 1; i <= L; i++) {
 		DRAW(i, 0, OUTLINE_COLOR);
 	}
@@ -317,9 +317,9 @@ bool markRegion(Rect r, const Color& bracketColor)
 	for  (int i = 2; i <= L; i++) {
 		DRAW(i, 1, BRACKET_COLOR);
 	}
-	
+
 	SDL_UpdateRect(screen, r.x0, r.y0, r.w, r.h);
-	
+
 	return true;
 }
 
@@ -331,12 +331,12 @@ bool renderScene_Threaded(void)
 	rendering = true;
 	extern int renderSceneThread(void*);
 	render_thread = SDL_CreateThread(renderSceneThread, NULL);
-	
+
 	if(render_thread == NULL) { //Failed to start for some bloody reason
 		rendering = render_async = false;
 		return false;
 	}
-	
+
 	while (!wantToQuit) {
 		{
 			MutexRAII raii(render_lock);
@@ -352,7 +352,7 @@ bool renderScene_Threaded(void)
 	rendering = false;
 	SDL_WaitThread(render_thread, NULL);
 	render_thread = NULL;
-	
+
 	render_async = false;
 	return true;
 }

@@ -61,69 +61,10 @@ public:
 	
 	virtual ElementType getElementType() const = 0; //!< Gets the element type
 	
-	/**
-	 * @brief set all the properties of a scene element from a parsed block
-	 *
-	 * This is a callback, called by the sceneparser, when it has finished
-	 * parsing a block of properties, related to some scene element.
-	 *
-	 * Consider the following (part of) scene:
-	 *
-	 * Sphere mySphere01 {
-	 *    center (12.5, 0.1, 0.3)
-	 *    radius 5.0
-	 * }
-	 *
-	 * A class Sphere should inherit from SceneElement and implement fillProperties() in the following manner
-	 *
-	 * class Sphere: public SceneElement {
-	 *	Vector pos;
-	 *	double radius;
-	 * public:
-	 * 	void fillProperties(ParsedBlock& pb) {
-	 *		pb.getVectorProp("center", &pos);
-	 *		pb.getDoubleProp("radius", &radius);
-	 *	}
-	 * };
-	 *
-	 * In fact, one would usually want to have a constructor that initializes the two
-	 * properties to some default values.
-	 * Also, for the sake of consistency, one should really rename that `pos' to `center' in
-	 * the class's definition.
-	 *
-	 * (the implementation of SceneElement::fillProperties() does nothing)
-	 */
 	virtual void fillProperties(ParsedBlock& pb);
-	
-	/**
-	 * @brief a callback that gets called before the rendering commences
-	 *
-	 * If you need to setup some internal data structures before rendering has begun,
-	 * you should place it here. This callback is executed after scene parsing, and before
-	 * the rendering commences. You might actually use other SceneElement's, but the beginFrame()
-	 * function is called for the different classes of SceneElement's in this specific order:
-	 *
-	 * 1) Lights
-	 * 2) Geometries
-	 * 3) Textures
-	 * 4) Shaders
-	 * 5) Nodes
-	 * 6) Camera
-	 * 7) GlobalSettings
-	 *
-	 * The order of calling beginFrame within the same group is undefined.
-	 *
-	 * All these callbacks are called by the Scene::beginRender() function.
-	 */
+
 	virtual void beginRender();
 	
-	/**
-	 * @brief same as beginRender(), but gets called before each frame
-	 *
-	 * the difference between beginRender() and beginFrame() is that beginRender() is only
-	 * called once, after parsing is done, whereas beginFrame is called before every frame
-	 * (e.g., when rendering an animation).
-	 */
 	virtual void beginFrame();
 	
 	friend class SceneParser;
@@ -153,6 +94,7 @@ public:
 	virtual bool getGeometryProp(const char* name, Geometry** value) = 0;
 	virtual bool getIntersectableProp(const char* name, Intersectable** value) = 0;
 	virtual bool getShaderProp(const char* name, Shader** value) = 0;
+	virtual bool getHighlightProp(const char* name, Shader** value) = 0;
 	virtual bool getTextureProp(const char* name, Texture** value) = 0;
 	virtual bool getNodeProp(const char* name, Node** value) = 0;
 	virtual bool getStringProp(const char* name, char* value) = 0; // the buffer should be 256 chars long
