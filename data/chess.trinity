@@ -71,6 +71,36 @@ CsgInter boardBase {
 	right platformCrop
 }
 
+Mesh pawn {
+	file "geom/PawnBlack.obj"
+	backfaceCulling false
+}
+
+Mesh queen {
+	file "geom/QueenBlack.obj"
+	backfaceCulling false
+}
+
+Mesh rook {
+	file "geom/RookBlack.obj"
+	backfaceCulling false
+}
+
+Mesh knight {
+	file "geom/KnightBlack.obj"
+	backfaceCulling false
+}
+
+Mesh king {
+	file "geom/KingBlack.obj"
+	backfaceCulling false
+}
+
+Mesh bishop {
+	file "geom/BishopBlack.obj"
+	backfaceCulling false
+}
+
 //////////////////////// TEXTURES & SHADERS  ///////////////////////////////
 
 Lambert whiteLamb {
@@ -129,6 +159,14 @@ Node field_1_A {
 	highlight highlightSHade
 	selection selectedSHade
 	translate (0, 0, 0)
+}
+
+Node pawn {
+	geometry  pawn
+	shader    darkFieldShade
+	highlight highlightSHade
+	selection selectedSHade
+	translate (0, 10, 0)
 }
 
 Node field_1_B {
