@@ -599,5 +599,41 @@ int main(int argc, char** argv)
 		waitForUserExit();
 	}
 	closeGraphics();
+
+	std::map<string, Piece*> pieces;
+	Board board;
+	pieces["black_pawn1"] = new Pawn(board.board[7][6], "pawn", "black");
+	pieces["black_pawn2"] = new Pawn(board.board[6][6], "pawn", "black");
+	pieces["black_pawn3"] = new Pawn(board.board[5][6], "pawn", "black");
+	pieces["black_pawn4"] = new Pawn(board.board[4][6], "pawn", "black");
+	pieces["black_pawn5"] = new Pawn(board.board[3][6], "pawn", "black");
+	pieces["black_pawn6"] = new Pawn(board.board[2][6], "pawn", "black");
+	pieces["black_pawn7"] = new Pawn(board.board[1][6], "pawn", "black");
+	pieces["black_pawn8"] = new Pawn(board.board[0][6], "pawn", "black");
+	pieces["white_pawn1"] = new Pawn(board.board[7][1], "pawn", "white");
+	pieces["white_pawn2"] = new Pawn(board.board[6][1], "pawn", "white");
+	pieces["white_pawn3"] = new Pawn(board.board[5][1], "pawn", "white");
+	pieces["white_pawn4"] = new Pawn(board.board[4][1], "pawn", "white");
+	pieces["white_pawn5"] = new Pawn(board.board[3][1], "pawn", "white");
+	pieces["white_pawn6"] = new Pawn(board.board[2][1], "pawn", "white");
+	pieces["white_pawn7"] = new Pawn(board.board[1][1], "pawn", "white");
+	pieces["white_pawn8"] = new Pawn(board.board[0][1], "pawn", "white");
+	pieces["black_rook1"] = new Pawn(board.board[7][7], "rook", "black");
+	pieces["black_rook2"] = new Pawn(board.board[0][7], "rook", "black");
+	pieces["black_knight1"] = new Pawn(board.board[6][7], "knight", "black");
+	pieces["black_knight2"] = new Pawn(board.board[1][7], "knight", "black");
+	pieces["black_bishop1"] = new Pawn(board.board[5][7], "bishop", "black");
+	pieces["black_bishop2"] = new Pawn(board.board[2][7], "bishop", "black");
+	pieces["black_queen"] = new Pawn(board.board[3][7], "queen", "black");
+	pieces["black_king"] = new Pawn(board.board[4][7], "king", "black");
+	pieces["white_rook1"] = new Pawn(board.board[7][0], "rook", "white");
+	pieces["white_rook2"] = new Pawn(board.board[0][0], "rook", "white");
+	pieces["white_knight1"] = new Pawn(board.board[6][0], "knight", "white");
+	pieces["white_knight2"] = new Pawn(board.board[1][0], "knight", "white");
+	pieces["white_bishop1"] = new Pawn(board.board[5][0], "bishop", "white");
+	pieces["white_bishop2"] = new Pawn(board.board[2][0], "bishop", "white");
+	pieces["white_queen"] = new Pawn(board.board[3][0], "queen", "white");
+	pieces["white_king"] = new Pawn(board.board[4][0], "king", "white");
+
 	return 0;
 }
