@@ -95,6 +95,7 @@ public:
 	virtual bool getIntersectableProp(const char* name, Intersectable** value) = 0;
 	virtual bool getShaderProp(const char* name, Shader** value) = 0;
 	virtual bool getHighlightProp(const char* name, Shader** value) = 0;
+	virtual bool getSelectionProp(const char* name, Shader** value) = 0;
 	virtual bool getTextureProp(const char* name, Texture** value) = 0;
 	virtual bool getNodeProp(const char* name, Node** value) = 0;
 	virtual bool getStringProp(const char* name, char* value) = 0; // the buffer should be 256 chars long

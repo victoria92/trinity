@@ -544,7 +544,7 @@ void mainloop(void)
 		displayVFB(vfb); // display to user
 		// determine how much time we spent in rendering...
 		double renderTime = (SDL_GetTicks() - frameTicks) / 1000.0;
-		// ... and use it when calculating camera movements, etc.
+		cout << "Render took : "<< renderTime << endl;
 		while (!redraw)
 		{
 			SDL_Event ev;
