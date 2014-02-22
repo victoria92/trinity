@@ -67,7 +67,9 @@ Color raytrace(const Ray& ray)
 
 	// use the shader of the closest node to shade the intersection:
 	if(closestNode->selected)
-		return closestNode->highlight->shade(ray, data);
+		return closestNode->selection->shade(ray, data);
+    else if(closestNode->highlighted)
+        return closestNode->highlight->shade(ray, data);
 	else
 		return closestNode->shader->shade(ray, data);
 }

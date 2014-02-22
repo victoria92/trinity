@@ -1,8 +1,8 @@
 # this is the chess board
 
 GlobalSettings {
-	frameWidth          640
-	frameHeight         480
+	frameWidth          1280
+	frameHeight         960
 	ambientLight        (0.075, 0.075, 0.075)
 	maxTraceDepth       8
 	wantPrepass			true
@@ -112,7 +112,7 @@ Lambert darkLamb {
 }
 
 Lambert boardLamb {
-	color (0.39, 0.23, 0.04)
+	color (0.59, 0.43, 0.24)
 }
 
 Reflection reflect {
@@ -130,7 +130,7 @@ Layered darkFieldShade {
 
 Layered boardShade {
 	layer boardLamb (1, 1, 1)
-	layer reflect (0.2, 0.2, 0.2)
+	layer reflect (0.4, 0.4, 0.4)
 }
 
 Lambert selectedSHade {
@@ -141,13 +141,336 @@ Lambert highlightSHade {
 	color (0.23, 0.73, 0.04)
 }
 
+//-----------------------------------
+
+BitmapTexture lavaTex {
+	file     "texture/lava.bmp"
+	scaling  0.005
+}
+
+Lambert lava {
+	color    (0.66, 0.66, 0.66)
+	texture  lavaTex
+}
+
+Layered darkPiece {
+	layer lava (1, 1, 1)
+	layer reflect (0.2, 0.2, 0.2)
+}
+
+//-----------------------------------
+
+BitmapTexture woodTex {
+	file     "texture/wood.bmp"
+	scaling  0.005
+}
+
+Lambert wood {
+	color    (0.36, 0.36, 0.36)
+	texture  woodTex
+}
+
+Layered lightPiece {
+	layer wood (1, 1, 1)
+	layer reflect (0.2, 0.2, 0.2)
+}
 ///////////////////////// NODES /////////////////////////////////////////////////
 
+Node black_pawn1 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (51, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn2 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (62, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn3 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (73, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn4 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (84, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn5 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (95, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn6 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (106, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn7 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (117, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node black_pawn8 {
+	geometry  pawn
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (128, 0, 48)
+	scale (10, 10, 10)
+}
+
+Node white_pawn1 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (51, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn2 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (62, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn3 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (73, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn4 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (84, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn5 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (95, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn6 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (106, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn7 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (117, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node white_pawn8 {
+	geometry  pawn
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (128, 0, 103)
+	scale (10, 10, 10)
+}
+
+Node black_rook1 {
+	geometry  rook
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (36, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_rook2 {
+	geometry  rook
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (113, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_knight1 {
+	geometry  knight
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (37, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_knight2 {
+	geometry  knight
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (92, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_bishop1 {
+	geometry  bishop
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (5, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_bishop2 {
+	geometry  bishop
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (38, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_queen {
+	geometry  queen
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (39, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node black_king {
+	geometry  king
+	shader    darkPiece
+	highlight darkPiece
+	selection selectedSHade
+	translate (37, 0, 37)
+	scale (7, 7, 7)
+}
+
+Node white_rook1 {
+	geometry  rook
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (36, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_rook2 {
+	geometry  rook
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (113, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_knight1 {
+	geometry  knight
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (37, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_knight2 {
+	geometry  knight
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (92, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_bishop1 {
+	geometry  bishop
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (5, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_bishop2 {
+	geometry  bishop
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (38, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_queen {
+	geometry  queen
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (39, 0, 114)
+	scale (7, 7, 7)
+}
+
+Node white_king {
+	geometry  king
+	shader    lightPiece
+	highlight lightPiece
+	selection selectedSHade
+	translate (37, 0, 114)
+	scale (7, 7, 7)
+}
+
+// --------------------------------------------------
 
 Node board {
 	geometry  boardBase
 	shader    boardShade
 	highlight boardShade
+	selection boardShade
 	translate (38, -1, 38)
 }
 
@@ -159,14 +482,6 @@ Node field_1_A {
 	highlight highlightSHade
 	selection selectedSHade
 	translate (0, 0, 0)
-}
-
-Node pawn {
-	geometry  pawn
-	shader    darkFieldShade
-	highlight highlightSHade
-	selection selectedSHade
-	translate (0, 10, 0)
 }
 
 Node field_1_B {

@@ -605,6 +605,7 @@ bool DefaultSceneParser::parse(const char* filename, Scene* ss)
 			}
 		}
 	}
+	
 	// filter out the nodes[] array; any nodes, which don't have a shader attached are transferred to the
 	// subnodes array:
 	for (int i = (int) s->nodes.size() - 1; i >= 0; i--) {
