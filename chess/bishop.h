@@ -13,7 +13,7 @@ public:
         for(i = ++x, j = ++y; i < 8 && j < 8 && board->board[i][j]->empty; i++, j++) {
             v.push_back(board->board[i][j]);
         }
-        if(i < 8, j < 8 && board->board[i][j]->piece->color != color) {
+        if(i < 8 && j < 8 && board->board[i][j]->piece->color != color) {
             v.push_back(board->board[i][j]);
         }
 

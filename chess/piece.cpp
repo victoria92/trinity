@@ -1,9 +1,18 @@
 #include "piece.h"
 
+Field::Field(int _x, int _y) : x(_x), y(_y) {}
+
 bool Field::operator==(const Field& f) {
     if(x == f.x && y == f.y)
         return true;
     return false;
+}
+
+Board::Board() {
+    for(int i = 0; i < 8; i++)
+    for(int j = 0; j < 8; j++) {
+        board[i][j] = new Field(i, j);
+    }
 }
 
 void Board::get_all_pieces(vector<Piece*>& v) {
@@ -63,7 +72,7 @@ bool Piece::move(Field& field) {
         Field* start_place = place;
         if(field.piece) {
             if(name == "king" && board->is_threatened() && field.piece->name == "rook" && color == field.piece->color) {
-                if(field.x = 0)
+                if(field.x == 0)
                     field.piece->place = board->board[3][place->y];
                 else
                     field.piece->place = board->board[5][place->y];

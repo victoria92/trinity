@@ -18,11 +18,12 @@ public:
     Piece* piece;
     Board* board;
     bool operator==(const Field&);
+    Field(int _x, int _y);
 };
 
 class Board {
 public:
-    //Board();
+    Board();
 
     //Board(const Board&);
     void get_all_pieces(vector<Piece*>&);
