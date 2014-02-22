@@ -1,5 +1,10 @@
 #include "piece.h"
 
+bool Field::operator==(const Field& f) {
+    if(x == f.x && y == f.y)
+        return true;
+    return false;
+}
 
 void Board::get_all_pieces(vector<Piece*>& v) {
     for(int i=0; i < 8; i++) {
@@ -22,52 +27,61 @@ bool Board::is_threatened() {
         }
     }
     for(int i = 0; i < pieces.size(); i++) {
-        set<Field> s;
-        pieces[i]->possible_moves(s);
-        if(s.find(king->place) != s.end())
-            return true;
+        vector<Field> v;
+        pieces[i]->possible_moves(v);
+        for(int i = 0; i < v.size(); i++) {
+            if(&v[i] == king->place) {
+                return true;
+            }
+        }
     }
     return false;
 }
 
-Piece::Piece(Field& field, string fname, string fcolor) :
+Piece::Piece(Field* field, string fname, string fcolor) :
     name(fname),
     color(fcolor),
     place(field),
-    board(field.board) {
-    field.piece = this;
-    field.empty = false;
+    board(field->board) {
+    field->piece = this;
+    field->empty = false;
     moved = false;
     beaten = false;
 }
 
 bool Piece::move(Field& field) {
-    set<Field> moves;
+    vector<Field> moves;
     possible_moves(moves);
-    if(moves.find(field) != moves.end()) {
+    bool flag = false;
+    for(int i = 0; i < moves.size(); i++) {
+        if(moves[i] == field) {
+            flag = true;
+        }
+    }
+    if(flag) {
         Piece* beated_piece = field.piece;
-        Field start_place = place;
+        Field* start_place = place;
         if(field.piece) {
             if(name == "king" && board->is_threatened() && field.piece->name == "rook" && color == field.piece->color) {
                 if(field.x = 0)
-                    field.piece->place = board[3][place.y];
+                    field.piece->place = board->board[3][place->y];
                 else
-                    field.piece->place = board[5][place.y];
+                    field.piece->place = board->board[5][place->y];
             }
             else {
-                field.piece.beaten = true;
-                field.piece.place = NULL;
+                field.piece->beaten = true;
+                //field.piece->place = nullptr;
             }
         }
         field.piece = this;
-        place.piece = NULL;
-        place.empty = true;
-        place = field;
-        if(board.is_threatened()) {
-            start_place.piece = this;
-            piece.place = start_place;
+        place->piece = NULL;
+        place->empty = true;
+        place = &field;
+        if(board->is_threatened()) {
+            start_place->piece = this;
+            place = start_place;
             field.piece = beated_piece;
-            beated_piece.place = field;
+            beated_piece->place = &field;
         }
         moved = true;
         return true;
