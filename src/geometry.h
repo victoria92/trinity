@@ -191,16 +191,19 @@ public:
 	Geometry* geom;
 	Shader* shader;
 	Shader* highlight;
+	Shader* selection;
 	Transform transform;
 	Texture* bump;
 
 	bool selected;
+	bool highlighted;
 
-	Node(): selected(false) { bump = NULL; }
+	Node(): selected(false), highlighted(false) { bump = NULL; }
 	Node(Geometry* g, Shader* s) { geom = g; shader = s; bump = NULL; }
 
 	// from Intersectable:
 	void toggleSelected() {selected = !selected;}
+	void toggleHighlighted() {highlighted = !highlighted;}
 
 	bool intersect(const Ray& ray, IntersectionData& data);
 	bool isInside(const Vector& p) const { return geom->isInside(transform.undoPoint(p)); }
@@ -212,6 +215,7 @@ public:
 		pb.getGeometryProp("geometry", &geom);
 		pb.getShaderProp("shader", &shader);
 		pb.getHighlightProp("highlight", &highlight);
+		pb.getSelectionProp("selection", &selection);
 		pb.getTransformProp(transform);
 		pb.getTextureProp("bump", &bump);
 	}

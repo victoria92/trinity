@@ -89,6 +89,7 @@ public:
 	bool getIntersectableProp(const char* name, Intersectable** value);
 	bool getShaderProp(const char* name, Shader** value);
 	bool getHighlightProp(const char* name, Shader** value);
+	bool getSelectionProp(const char* name, Shader** value);
 	bool getTextureProp(const char* name, Texture** value);
 	bool getNodeProp(const char* name, Node** value);
 	bool getStringProp(const char* name, char* value);
@@ -249,6 +250,15 @@ bool ParsedBlockImpl::getShaderProp(const char* name, Shader** value)
 }
 
 bool ParsedBlockImpl::getHighlightProp(const char* name, Shader** value)
+{
+	PBEGIN;
+	Shader* s = parser->findShaderByName(value_s);
+	if (!s) throw SyntaxError(line, "Shader not defined");
+	*value = s;
+	return true;
+}
+
+bool ParsedBlockImpl::getSelectionProp(const char* name, Shader** value)
 {
 	PBEGIN;
 	Shader* s = parser->findShaderByName(value_s);

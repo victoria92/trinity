@@ -103,8 +103,12 @@ Layered boardShade {
 	layer reflect (0.2, 0.2, 0.2)
 }
 
-Lambert selection {
+Lambert selectedSHade {
 	color (0.79, 0.23, 0.04)
+}
+
+Lambert highlightSHade {
+	color (0.23, 0.73, 0.04)
 }
 
 ///////////////////////// NODES /////////////////////////////////////////////////
@@ -122,56 +126,57 @@ Node board {
 Node field_1_A {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
+	selection selectedSHade
 	translate (0, 0, 0)
 }
 
 Node field_1_B {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 0)
 }
 
 Node field_1_C {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 0)
 }
 
 Node field_1_D {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 0)
 }
 
 Node field_1_E {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 0)
 }
 
 Node field_1_F {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 0)
 }
 
 Node field_1_G {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 0)
 }
 
 Node field_1_H {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 0)
 }
 
@@ -180,56 +185,56 @@ Node field_1_H {
 Node field_2_A {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 11)
 }
 
 Node field_2_B {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 11)
 }
 
 Node field_2_C {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 11)
 }
 
 Node field_2_D {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 11)
 }
 
 Node field_2_E {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 11)
 }
 
 Node field_2_F {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 11)
 }
 
 Node field_2_G {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 11)
 }
 
 Node field_2_H {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 11)
 }
 
@@ -238,56 +243,56 @@ Node field_2_H {
 Node field_3_A {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 22)
 }
 
 Node field_3_B {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 22)
 }
 
 Node field_3_C {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 22)
 }
 
 Node field_3_D {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 22)
 }
 
 Node field_3_E {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 22)
 }
 
 Node field_3_F {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 22)
 }
 
 Node field_3_G {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 22)
 }
 
 Node field_3_H {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 22)
 }
 
@@ -296,56 +301,56 @@ Node field_3_H {
 Node field_4_A {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 33)
 }
 
 Node field_4_B {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 33)
 }
 
 Node field_4_C {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 33)
 }
 
 Node field_4_D {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 33)
 }
 
 Node field_4_E {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 33)
 }
 
 Node field_4_F {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 33)
 }
 
 Node field_4_G {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 33)
 }
 
 Node field_4_H {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 33)
 }
 
@@ -354,56 +359,56 @@ Node field_4_H {
 Node field_5_A {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 44)
 }
 
 Node field_5_B {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 44)
 }
 
 Node field_5_C {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 44)
 }
 
 Node field_5_D {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 44)
 }
 
 Node field_5_E {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 44)
 }
 
 Node field_5_F {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 44)
 }
 
 Node field_5_G {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 44)
 }
 
 Node field_5_H {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 44)
 }
 
@@ -412,56 +417,56 @@ Node field_5_H {
 Node field_6_A {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 55)
 }
 
 Node field_6_B {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 55)
 }
 
 Node field_6_C {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 55)
 }
 
 Node field_6_D {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 55)
 }
 
 Node field_6_E {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 55)
 }
 
 Node field_6_F {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 55)
 }
 
 Node field_6_G {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 55)
 }
 
 Node field_6_H {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 55)
 }
 
@@ -470,56 +475,56 @@ Node field_6_H {
 Node field_7_A {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 66)
 }
 
 Node field_7_B {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 66)
 }
 
 Node field_7_C {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 66)
 }
 
 Node field_7_D {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 66)
 }
 
 Node field_7_E {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 66)
 }
 
 Node field_7_F {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 66)
 }
 
 Node field_7_G {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 66)
 }
 
 Node field_7_H {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 66)
 }
 
@@ -528,55 +533,55 @@ Node field_7_H {
 Node field_8_A {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (0, 0, 77)
 }
 
 Node field_8_B {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (11, 0, 77)
 }
 
 Node field_8_C {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (22, 0, 77)
 }
 
 Node field_8_D {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (33, 0, 77)
 }
 
 Node field_8_E {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (44, 0, 77)
 }
 
 Node field_8_F {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (55, 0, 77)
 }
 
 Node field_8_G {
 	geometry  field
 	shader    whiteFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (66, 0, 77)
 }
 
 Node field_8_H {
 	geometry  field
 	shader    darkFieldShade
-	highlight selection
+	highlight highlightSHade
 	translate (77, 0, 77)
 }
