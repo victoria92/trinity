@@ -200,6 +200,7 @@ public:
 
 	Node(): selected(false), highlighted(false) { bump = NULL; }
 	Node(Geometry* g, Shader* s) { geom = g; shader = s; bump = NULL; }
+	Node(Geometry* g, Shader* s, Shader* h, Shader* sel) { geom = g; shader = s; bump = NULL; highlight = h; selection = sel;}
 
 	// from Intersectable:
 	void toggleSelected() {selected = !selected;}
