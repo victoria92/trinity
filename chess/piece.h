@@ -1,4 +1,5 @@
 #ifndef PIECE_H
+#define PIECE_H
 
 #include <set>
 #include <vector>
@@ -21,9 +22,9 @@ public:
 
 class Board {
 public:
-    Board();
+    //Board();
 
-    Board(const Board&);
+    //Board(const Board&);
     void get_all_pieces(vector<Piece*>&);
     bool is_threatened();
 
@@ -40,7 +41,7 @@ public:
     Board* board;
 
     Piece(Field*, string, string);
-    virtual void possible_moves(vector<Field>&) = 0;
+    virtual void possible_moves(vector<Field*>&) = 0;
     bool move(Field&);
 };
 

@@ -19,10 +19,10 @@ public:
                 v.push_back(board->board[x][y + 2*c]);
             }
         }
-        if(board->board[x - 1][y + c] != NULL && board->board[x - 1][y + c].piece.color != color) {
+        if(board->board[x - 1][y + c] != NULL && board->board[x - 1][y + c]->piece->color != color) {
             v.push_back(board->board[x - 1][y + c]);
         }
-        if(board->board[x + 1][y + c] != NULL && board->board[x + 1][y + c].piece.color != color) {
+        if(board->board[x + 1][y + c] != NULL && board->board[x + 1][y + c]->piece->color != color) {
             v.push_back(board->board[x + 1][y + c]);
         }
     };

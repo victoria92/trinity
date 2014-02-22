@@ -27,10 +27,10 @@ bool Board::is_threatened() {
         }
     }
     for(int i = 0; i < pieces.size(); i++) {
-        vector<Field> v;
+        vector<Field*> v;
         pieces[i]->possible_moves(v);
         for(int i = 0; i < v.size(); i++) {
-            if(&v[i] == king->place) {
+            if(v[i] == king->place) {
                 return true;
             }
         }
@@ -50,11 +50,11 @@ Piece::Piece(Field* field, string fname, string fcolor) :
 }
 
 bool Piece::move(Field& field) {
-    vector<Field> moves;
+    vector<Field*> moves;
     possible_moves(moves);
     bool flag = false;
     for(int i = 0; i < moves.size(); i++) {
-        if(moves[i] == field) {
+        if(*moves[i] == field) {
             flag = true;
         }
     }
